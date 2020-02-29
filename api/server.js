@@ -2,7 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 
-const authRouter = require('../auth/auth-router'); /* 
+const authRouter = require('../auth/router'); /* 
 const articlesRouter = require("../articles/router");
 const categoriesRouter = require("../categories/router"); */
 
@@ -12,12 +12,15 @@ server.use(express.json());
 server.use(cors());
 server.use(helmet());
 
-server.use('/api/auth', authRouter);
-server.use('/api/categories', resourcesRouter);
-server.use('/api/articles', projectsRouter);
+server.use(
+	'/api/auth',
+	authRouter
+); /* 
+server.use('/api/categories', categoriesRouter);
+server.use('/api/articles', articlesRouter); */
 
 server.get('/', (req, res) => {
-	res.send({ API: UP });
+	res.send({ API: 'UP' });
 });
 
 server.use((err, req, res, next) => {
