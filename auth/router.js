@@ -41,14 +41,12 @@ router.post('/register', (req, res) => {
  * @apiName Login
  * @apiGroup Users
  *
- * @apiSuccess {Number} id User id
  * @apiSuccess {String} username User Username
  * @apiSuccess {String} password User Password
  *
  * @apiSuccessExample Successful Response:
  * HTTP/1.1 201 Created
  * 	{
- *	  "id": 1,
  *	  "username": "ana",
  *	  "password": "token"
  *	}
