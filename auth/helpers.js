@@ -9,11 +9,11 @@ module.exports = {
 };
 
 function all() {
-	return db('auth');
+	return db('user');
 }
 
 function add(user) {
-	return db('auth')
+	return db('user')
 		.insert(user, 'id')
 		.then(ids => {
 			const [id] = ids;
@@ -22,14 +22,14 @@ function add(user) {
 }
 
 function findById(id) {
-	return db('auth')
+	return db('user')
 		.where({ id })
 		.first();
 }
 
 function findBy(filter) {
 	console.log('filter', filter);
-	return db('auth').where(filter);
+	return db('user').where(filter);
 }
 
 function remove(id) {

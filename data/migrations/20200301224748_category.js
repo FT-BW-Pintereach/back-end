@@ -1,23 +1,20 @@
 exports.up = function(knex) {
-	return knex.schema.createTable('categories', tbl => {
+	return knex.schema.createTable('category', tbl => {
 		tbl.increments();
 
-		tbl
-			.text('cat_name')
-			.notNullable()
-			.unique();
+		tbl.string('name').notNullable();
 
 		tbl
 			.integer('user_id')
 			.notNullable()
 			.unsigned()
 			.references('id')
-			.inTable('auth')
+			.inTable('user')
 			.onUpdate('CASCADE')
 			.onDelete('CASCADE');
 	});
 };
 
 exports.down = function(knex) {
-	return knex.schema.dropTableIfExists('categories');
+	return knex.schema.dropTableIfExists('category');
 };

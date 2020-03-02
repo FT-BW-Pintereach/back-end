@@ -6,6 +6,11 @@ const { jwtSecret } = require('./../config/secrets.js');
 
 const Helpers = require('./helpers.js');
 
+/**
+ * @api {post} /api/auth/register Create User
+ * @apiName Signup
+ * @apiGroup Users
+ */
 // for endpoints beginning with /api/auth
 router.post('/register', (req, res) => {
 	let user = req.body;
@@ -22,22 +27,26 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
 	let { username, password } = req.body;
+	console.log(req.body);
 
 	return Helpers.findBy({ username })
 		.first()
 		.then(user => {
+			console.log('user', user);
 			if (user && bcrypt.compareSync(password, user.password)) {
 				const token = generateToken(user);
+				const id = user.id;
 				res.status(200).json({
 					message: `Welcome ${user.username}!`,
-					token
+					token,
+					id
 				});
 			} else {
 				res.status(401).json({ message: 'Invalid Credentials' });
 			}
 		})
-		.catch(error => {
-			res.status(500).json(error);
+		.catch(({ name, code, message, stack }) => {
+			res.status(500).json({ name, code, message, stack });
 		});
 });
 
