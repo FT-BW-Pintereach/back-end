@@ -10,8 +10,19 @@ const Helpers = require('./helpers.js');
  * @api {post} /api/auth/register Create User
  * @apiName Signup
  * @apiGroup Users
+ *
+ * @apiSuccess {String} username User Username
+ * @apiSuccess {String} password User Password
+ *
+ * @apiSuccessExample Successful Response:
+ * HTTP/1.1 201 Created
+ * 	{
+ *	  "username": "ana",
+ *	  "password": "token"
+ *	}
+ *
  */
-// for endpoints beginning with /api/auth
+
 router.post('/register', (req, res) => {
 	let user = req.body;
 	const hash = bcrypt.hashSync(user.password, 12);
@@ -25,6 +36,24 @@ router.post('/register', (req, res) => {
 		});
 });
 
+/**
+ * @api {post} /api/auth/login Login User
+ * @apiName Login
+ * @apiGroup Users
+ *
+ * @apiSuccess {Number} id User id
+ * @apiSuccess {String} username User Username
+ * @apiSuccess {String} password User Password
+ *
+ * @apiSuccessExample Successful Response:
+ * HTTP/1.1 201 Created
+ * 	{
+ *	  "id": 1,
+ *	  "username": "ana",
+ *	  "password": "token"
+ *	}
+ *
+ */
 router.post('/login', (req, res) => {
 	let { username, password } = req.body;
 	console.log(req.body);

@@ -8,9 +8,11 @@
 	"scripts": {
 		"server": "nodemon index.js",
 		"start": "node index.js",
-		"test": "cross-env DB_ENV=testing jest --watch"
+		"test": "cross-env DB_ENV=testing jest --watch",
+		"docs": "apidoc -i ./ -e node_modules -o docs"
 	},
 	"dependencies": {
+		"apidoc": "^0.20.0",
 		"bcryptjs": "^2.4.3",
 		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",

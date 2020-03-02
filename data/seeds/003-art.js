@@ -7,11 +7,13 @@ exports.seed = function(knex) {
 			return knex('article').insert([
 				{
 					id: 1,
+					user_id: '1',
 					title: 'Training Kit',
-					link: 'https://learn.lambdaschool.com/course/cs-fsw',
-					image: 'https://source.unsplash.com/random/200x200',
-					category_id: '1',
-					user_id: '1'
+					description: 'blabla',
+					url: 'https://learn.lambdaschool.com/course/cs-fsw',
+					urlToImage: 'https://source.unsplash.com/random/200x200',
+					author: 'Person',
+					category_id: '1'
 				}
 			]);
 		});
