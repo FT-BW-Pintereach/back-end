@@ -3,10 +3,18 @@ const router = express.Router();
 
 const Categories = require('./model.js');
 
-//get folderrs/categories from a user
+/**
+ * @api {get} /api/categories/${id} Request All Categories for a User
+ * @apiName GetCategories
+ * @apiGroup Category
+ */
+//get folders/categories from a user
 router.get('/:id', (req, res) => {
-	Categories.getCategories()
+	const id = req.headers.user_id;
+
+	Categories.findById(id)
 		.then(categories => {
+			console.log('yo');
 			res.json(categories);
 		})
 		.catch(err => {
@@ -15,25 +23,35 @@ router.get('/:id', (req, res) => {
 		});
 });
 
-/api/aceegiorst /
-	1 /
-	//create resource
-	router.post('/:id/resources', (req, res) => {
-		const resource = req.body;
+//create get folders/categories from a user
+router.post('/:id', (req, res) => {
+	const id = req.headers.user_id;
+	console.log('ui', req.headers.user_id);
+	const name = req.body.name;
+	console.log(id);
+	console.log(name);
 
-		Categories.addResource(resource)
-			.then(resource => {
-				console.log(resource);
-				Resources.addResourceToIndex({
-					project_id: req.params.id,
-					resource_id: resource.id
-				});
-				res.status(201).json(resource);
-			})
-			.catch(err => {
-				res.status(500).json({ message: 'Failed to create new resource' });
-			});
-	});
+	Categories.addFolder(name, id)
+		.then(folder => {
+			res.status(201).json({ Created: 'New Folder' });
+		})
+		.catch(err => {
+			res.status(500).json({ message: 'Failed to create new folder' });
+		});
+});
+
+//delete folders/categories from a user
+router.delete('/:id', (req, res) => {
+	const id = req.headers.user_id;
+
+	Categories.del(id)
+		.then(folder => {
+			res.status(201).json({ Created: 'New Folder' });
+		})
+		.catch(err => {
+			res.status(500).json({ message: 'Failed to create new folder' });
+		});
+});
 
 //filter resources to see if it exists
 //addd resource to index if it already exists
