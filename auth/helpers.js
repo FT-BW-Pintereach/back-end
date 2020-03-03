@@ -33,7 +33,7 @@ function findBy(filter) {
 }
 
 function remove(id) {
-	return db('users')
+	return db('user')
 		.where({ id })
 		.del();
 }
