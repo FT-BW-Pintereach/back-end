@@ -16,18 +16,23 @@ function addFolder(name, user_id) {
 	return db('category').insert(newCategory);
 }
 
-/* 
-function addResourceToIndex(index) {
-	return db('resourcesofproject')
-		.insert(index)
-		.then(ids => ({ id: ids[0] }));
+function updateFolder(name, cat_id, user_id) {
+	console.log('here');
+	const updatedCategory = {
+		name: name,
+		user_id: user_id
+	};
+	console.log('updatedCategory', updatedCategory);
+	return db('category')
+		.update(updatedCategory)
+		.where('id', cat_id);
 }
- */
 
 function del(id) {
-	return db('projects')
+	console.log('o');
+	return db('category')
 		.where({ id })
-		.first();
+		.del();
 }
 
 function findById(id) {
@@ -37,14 +42,28 @@ function findById(id) {
 }
 
 //retrieving a list of tasks, should include the project name and project description.
-
+function findArticles(user_id) {
+	return db('article')
+		.select(
+			'category_id',
+			'title',
+			'url',
+			'urlToImage',
+			'user_id',
+			'author'
+			/* 'category.user_id as ui',
+			'category.name as categoryname' */
+		)
+		/* 		.innerJoin('category', 'category_id', 'category.id')
+		 */ .where({ user_id });
+}
 //adding resources
-
-//adding projects
 
 module.exports = {
 	getCategories,
 	addFolder,
 	findById,
-	del
+	del,
+	findArticles,
+	updateFolder
 };
