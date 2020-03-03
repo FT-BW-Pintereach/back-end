@@ -19,6 +19,8 @@ server.use('/api/articles', restricted, articlesRouter);
 /* 
 server.use('/api/articles', articlesRouter); */
 
+server.use('/docs', express.static('./docs'));
+
 server.get('/', (req, res) => {
 	res.send({ API: 'UP' });
 });
