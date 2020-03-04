@@ -1,5 +1,343 @@
 define({ "api": [
   {
+    "type": "delete",
+    "url": "/api/articles/${id}",
+    "title": "Deletes a article",
+    "name": "Deletes_Articles",
+    "group": "Articles",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>token</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "article_id",
+            "description": "<p>Article id - sent in params as id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Successful Response:",
+          "content": "HTTP/1.1 200 OK\n\n1",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./articles/router.js",
+    "groupTitle": "Articles"
+  },
+  {
+    "type": "get",
+    "url": "/api/articles/${id}",
+    "title": "Displays all articles from a category",
+    "name": "Get_Articles",
+    "group": "Articles",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>token</p>"
+          },
+          {
+            "group": "Header",
+            "type": "Number",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>1</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "category_id",
+            "description": "<p>Category/Folder id - sent in params as id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Article Id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>User ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>Title of Article</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Description of Article</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "url",
+            "description": "<p>Article url</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "urlToImage",
+            "description": "<p>Image url</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "author",
+            "description": "<p>Author</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "category_id",
+            "description": "<p>Category/Folder Id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Category/Folder Name</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Successful Response:",
+          "content": "HTTP/1.1 200 OK\n[\n{\n \"id\": 6,\n \"user_id\": 2,\n \"title\": \"some title\",\n \"description\": \"blabla\",\n \"url\": \"www.google.com\",\n \"urlToImage\": \"https://source.unsplash.com/random/200x200\",\n \"author\": \"Person\",\n \"category_id\": 1,\n \"name\": \"Lambda School\"\n},\n{\n \"id\": 7,\n \"user_id\": 2,\n \"title\": \"aarttt\",\n \"description\": \"blabla\",\n \"url\": \"https://learn.lambdaschool.com/\",\n \"urlToImage\": \"https://source.unsplash.com/random/200x200\",\n \"author\": \"Person\",\n \"category_id\": 1,\n \"name\": \"Lambda School\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./articles/router.js",
+    "groupTitle": "Articles"
+  },
+  {
+    "type": "post",
+    "url": "/api/articles/${id}",
+    "title": "Save/Post Article to a Folder",
+    "name": "Save_Article",
+    "group": "Articles",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>token</p>"
+          },
+          {
+            "group": "Header",
+            "type": "Number",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>1</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "category_id",
+            "description": "<p>Category/Folder id - sent in params as id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>Title of Article</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Article's Description</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "url",
+            "optional": false,
+            "field": "url",
+            "description": "<p>Article's Url</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "urlToImage",
+            "optional": false,
+            "field": "Image",
+            "description": "<p>Url</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "author",
+            "optional": false,
+            "field": "Author",
+            "description": "<p>of the Article</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Successful Response:",
+          "content": "HTTP/1.1 201 Created\n\n1",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./articles/router.js",
+    "groupTitle": "Articles"
+  },
+  {
+    "type": "put",
+    "url": "/api/articles/${id}",
+    "title": "Update Article",
+    "name": "Update_Articles",
+    "group": "Articles",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>token</p>"
+          },
+          {
+            "group": "Header",
+            "type": "Number",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>1</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "article_id",
+            "description": "<p>Category/Folder id - sent in params as id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>Title of Article</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Article's Description</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "url",
+            "optional": false,
+            "field": "url",
+            "description": "<p>Article's Url</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "urlToImage",
+            "optional": false,
+            "field": "Image",
+            "description": "<p>Url</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "author",
+            "optional": false,
+            "field": "Author",
+            "description": "<p>of the Article</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Successful Response:",
+          "content": "HTTP/1.1 201 Created\n\n1",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./articles/router.js",
+    "groupTitle": "Articles"
+  },
+  {
     "success": {
       "fields": {
         "Success 200": [
@@ -368,22 +706,29 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "username",
-            "description": "<p>User Username</p>"
+            "field": "message",
+            "description": "<p>Greeting!</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "password",
-            "description": "<p>User Password</p>"
+            "field": "token",
+            "description": "<p>Keep it! Or you can't sit with us</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>User id</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Successful Response:",
-          "content": "HTTP/1.1 201 Created\n\t{\n\t  \"username\": \"ana\",\n\t  \"password\": \"token\"\n\t}",
+          "content": "HTTP/1.1 201 Created\n {\n  \"message\": \"Welcome ana!\",\n  \"token\": \"tokenreallylong\",\n  \"id\": 1\n }",
           "type": "json"
         }
       ]
@@ -398,9 +743,36 @@ define({ "api": [
     "title": "Create User",
     "name": "Signup",
     "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>User Username</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>User Password</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>User id</p>"
+          },
           {
             "group": "Success 200",
             "type": "String",
@@ -413,14 +785,14 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "password",
-            "description": "<p>User Password</p>"
+            "description": "<p>User password</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Successful Response:",
-          "content": "HTTP/1.1 201 Created\n\t{\n\t  \"username\": \"ana\",\n\t  \"password\": \"token\"\n\t}",
+          "content": "HTTP/1.1 201 Created\n {\n   \"id\": 1\n   \"username\": \"ana\",\n   \"password\": \"password\"\n}",
           "type": "json"
         }
       ]

@@ -16,8 +16,6 @@ server.use(helmet());
 server.use('/api/auth', authRouter);
 server.use('/api/categories', restricted, categoriesRouter);
 server.use('/api/articles', restricted, articlesRouter);
-/* 
-server.use('/api/articles', articlesRouter); */
 
 server.use('/docs', express.static('./docs'));
 

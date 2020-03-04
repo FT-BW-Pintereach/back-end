@@ -5,6 +5,17 @@ function getArticlesById(cat_id, user_id) {
 	return db('article')
 		.join('category', 'category.id', 'article.category_id')
 		.join('user', 'user.id', 'article.user_id')
+		.select(
+			'article.id',
+			'article.user_id',
+			'article.title',
+			'article.description',
+			'article.url',
+			'article.urlToImage',
+			'article.author',
+			'article.category_id',
+			'category.name'
+		)
 		.where('category.id', cat_id)
 		.where('user.id', user_id);
 }
