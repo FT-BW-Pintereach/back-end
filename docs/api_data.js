@@ -496,6 +496,58 @@ define({ "api": [
     "groupTitle": "Category"
   },
   {
+    "type": "post",
+    "url": "/api/categories/${id}/favorite",
+    "title": "Favorite Folder/Category",
+    "name": "Favorite_Categories",
+    "group": "Category",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>token</p>"
+          },
+          {
+            "group": "Header",
+            "type": "Number",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>1</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "category_id",
+            "description": "<p>Category/Folder id - sent in params as id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Successful Response:",
+          "content": "HTTP/1.1 201 Created\n{\n 1\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./categories/router.js",
+    "groupTitle": "Category"
+  },
+  {
     "type": "get",
     "url": "/api/categories/${id}",
     "title": "Request All Categories from a User",

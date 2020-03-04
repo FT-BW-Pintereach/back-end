@@ -202,7 +202,7 @@ router.delete('/:id', (req, res) => {
  * @apiHeader {Number} user_id 1
  *
  * @apiParam {Number} category_id Category/Folder id - sent in params as id
- *s
+ *
  * @apiSuccessExample Successful Response:
  * HTTP/1.1 201 Created
  * {
