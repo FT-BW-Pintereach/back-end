@@ -1,10 +1,7 @@
-# Api: (https://pinter-each.herokuapp.com)
+## Api: (https://pinter-each.herokuapp.com)
 
-# Documentation here:
+## Documentation here:(https://pinter-each.herokuapp.com/docs)
 
-[Docs](https://pinter-each.herokuapp.com/docs)
-
-## Schema
+### Schema
 
 ![Shema](/schema.png)
-Format: ![Alt Text](url)
