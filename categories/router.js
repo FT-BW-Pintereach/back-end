@@ -193,7 +193,34 @@ router.delete('/:id', (req, res) => {
 		});
 });
 
-//filter resources to see if it exists
-//addd resource to index if it already exists
+/**
+ * @api {post} /api/categories/${id}/favorite Favorite Folder/Category
+ * @apiName Favorite Categories
+ * @apiGroup Category
+ *
+ * @apiHeader {String} authorization token
+ * @apiHeader {Number} user_id 1
+ *
+ * @apiParam {Number} category_id Category/Folder id - sent in params as id
+ *s
+ * @apiSuccessExample Successful Response:
+ * HTTP/1.1 201 Created
+ * {
+ *  1
+ * }
+ */
+//Favorite a folder
+router.post('/:id/favorite', (req, res) => {
+	const cat_id = req.params.id;
+
+	Categories.addFav(cat_id)
+		.then(response => {
+			console.log(response);
+			res.status(201).json(response);
+		})
+		.catch(({ name, code, message, stack }) => {
+			res.status(500).json({ name, code, message, stack });
+		});
+});
 
 module.exports = router;

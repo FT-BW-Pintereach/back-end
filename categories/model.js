@@ -57,7 +57,14 @@ function findArticles(user_id) {
 		/* 		.innerJoin('category', 'category_id', 'category.id')
 		 */ .where({ user_id });
 }
-//adding resources
+
+function addFav(cat_id) {
+	console.log('here');
+
+	return db('category')
+		.update({ favorite: true })
+		.where('id', cat_id);
+}
 
 module.exports = {
 	getCategories,
@@ -65,5 +72,6 @@ module.exports = {
 	findById,
 	del,
 	findArticles,
-	updateFolder
+	updateFolder,
+	addFav
 };
