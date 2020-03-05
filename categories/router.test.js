@@ -30,7 +30,6 @@ describe('GET /:id', () => {
 				username: username,
 				password: 'pass'
 			});
-		console.log('LALALALLAL', register.body);
 		process.env.UI = register.body.id;
 		const new_user = await Auth.findBy({ username: 'testing' });
 	});
@@ -47,7 +46,6 @@ describe('GET /:id', () => {
 			.expect('Content-Type', /json/)
 			.expect(200);
 		process.env.TOKEN = login.body.token;
-		console.log('adsajd', process.env.TOKEN);
 	});
 
 	it('gets folders from users', async () => {
@@ -57,9 +55,6 @@ describe('GET /:id', () => {
 			.set('Authorization', process.env.TOKEN)
 			.set('user_id', process.env.UI)
 			.then(response => {
-				console.log('RES', response.body);
-				console.log('process.env.UI', process.env.UI);
-				console.log('Authorization', process.env.TOKEN);
 				expect(Array.isArray(response.body)).toBe(true);
 			});
 	});
@@ -71,10 +66,36 @@ describe('GET /:id', () => {
 			.set('Authorization', process.env.TOKEN)
 			.set('user_id', process.env.UI)
 			.then(response => {
+				expect(Array.isArray(response.body.art)).toBe(true);
+				expect(response.status).toBe(200);
+			});
+	});
+
+	it('creates folder', async () => {
+		const id = process.env.UI;
+		const res = await request(server)
+			.post(`/api/categories/${id}`)
+			.set('Authorization', process.env.TOKEN)
+			.set('user_id', process.env.UI)
+			.send({ name: 'new folder' })
+			.then(response => {
+				expect(response.body.Created).toBe('New Folder');
+			});
+	});
+
+	it('updated folder with id 1', async () => {
+		const id = process.env.UI;
+		const res = await request(server)
+			.put(`/api/categories/${id}`)
+			.set('Authorization', process.env.TOKEN)
+			.set('user_id', process.env.UI)
+			.send({ name: 'updated folder' })
+			.then(response => {
 				console.log('RES', response.body);
 				console.log('process.env.UI', process.env.UI);
 				console.log('Authorization', process.env.TOKEN);
-				expect(Array.isArray(response.body.art)).toBe(true);
+				console.log('aaaaa', response.body);
+				expect(response.body.Created).toBe('Updated Folder');
 			});
 	});
 });

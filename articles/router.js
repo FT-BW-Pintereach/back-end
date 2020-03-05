@@ -139,7 +139,7 @@ router.post('/:id/', (req, res) => {
  * @apiParam {String} description Article's Description
  * @apiParam {String} url Article's Url
  * @apiParam {String} urlToImage urlToImage
- * @apiParam {author} Author of the Article
+ * @apiParam {String} author Author of the Article
  *
  * @apiSuccessExample Successful Response:
  * HTTP/1.1 201 Created
