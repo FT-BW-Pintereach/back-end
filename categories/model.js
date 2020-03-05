@@ -13,14 +13,19 @@ function addFolder(name, user_id) {
 	return db('category').insert(newCategory);
 }
 
-function updateFolder(name, cat_id, user_id) {
+function updateFolder(changes, cat_id, user_id) {
 	const updatedCategory = {
-		name: name,
+		name: changes.name,
 		user_id: user_id
 	};
-	return db('category')
-		.update(updatedCategory)
-		.where('id', cat_id);
+	console.log('here', updatedCategory);
+	if (updatedCategory.name !== undefined) {
+		return db('category')
+			.where('id', cat_id)
+			.update(updatedCategory);
+	} else {
+		return '0';
+	}
 }
 
 function del(id) {

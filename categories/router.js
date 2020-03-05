@@ -127,7 +127,7 @@ router.post('/:id', (req, res) => {
  * @apiParam {Number} category_id Category/Folder id - sent in params as id
  * @apiParam {String} name Folder Name - sent in body
  *
- * @apiSuccess {String} name Folder Name
+ * @apiSuccess {String} name Folder Name Updated
  *
  * @apiSuccessExample Successful Response:
  * HTTP/1.1 201 Created
@@ -136,19 +136,33 @@ router.post('/:id', (req, res) => {
  */
 //create get folders/categories from a user
 //update folders/categories from a user
-router.put('/:id', (req, res) => {
+router.put('/:id', check, (req, res) => {
 	const cat_id = req.params.id;
 	const user_id = req.headers.user_id;
-	const name = req.body.name;
+	const changes = req.body;
 
-	Categories.updateFolder(name, cat_id, user_id)
+	Categories.updateFolder(changes, cat_id, user_id)
 		.then(folder => {
+			console.log('folder???', folder);
 			res.status(201).json({ Updated: folder });
 		})
 		.catch(err => {
 			res.status(500).json({ message: 'Failed to create new folder' });
 		});
 });
+
+function check(req, res, next) {
+	const id = req.params.id;
+	console.log('idd', id);
+	console.log('nassssssssssme', req.body);
+
+	if (req.body.name === undefined) {
+		res.status(400).json({ message: 'it should be name' });
+	} else {
+		console.log('inside');
+		next();
+	}
+}
 
 /**
  * @api {delete} /api/categories/${id} Delete Folder/Category
