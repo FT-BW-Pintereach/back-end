@@ -302,17 +302,17 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "url",
+            "type": "String",
             "optional": false,
             "field": "url",
             "description": "<p>Article's Url</p>"
           },
           {
             "group": "Parameter",
-            "type": "urlToImage",
+            "type": "String",
             "optional": false,
-            "field": "Image",
-            "description": "<p>Url</p>"
+            "field": "urlToImage",
+            "description": "<p>urlToImage</p>"
           },
           {
             "group": "Parameter",
