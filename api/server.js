@@ -2,8 +2,8 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 
-const authRouter = require('../auth/router'); /* 
-const articlesRouter = require("../articles/router");*/
+const authRouter = require('../auth/router');
+const articlesRouter = require('../articles/router');
 const categoriesRouter = require('../categories/router');
 const restricted = require('../middleware/restricted.js');
 
@@ -15,8 +15,9 @@ server.use(helmet());
 
 server.use('/api/auth', authRouter);
 server.use('/api/categories', restricted, categoriesRouter);
-/* 
-server.use('/api/articles', articlesRouter); */
+server.use('/api/articles', restricted, articlesRouter);
+
+server.use('/docs', express.static('./docs'));
 
 server.get('/', (req, res) => {
 	res.send({ API: 'UP' });

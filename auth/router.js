@@ -11,15 +11,20 @@ const Helpers = require('./helpers.js');
  * @apiName Signup
  * @apiGroup Users
  *
+ * @apiParam {String} username User Username
+ * @apiParam {String} password User Password
+ *
+ * @apiSuccess {Number} id User id
  * @apiSuccess {String} username User Username
- * @apiSuccess {String} password User Password
+ * @apiSuccess {String} password User password
  *
  * @apiSuccessExample Successful Response:
  * HTTP/1.1 201 Created
- * 	{
- *	  "username": "ana",
- *	  "password": "token"
- *	}
+ *  {
+ *    "id": 1
+ *    "username": "ana",
+ *    "password": "password"
+ * }
  *
  */
 
@@ -41,25 +46,25 @@ router.post('/register', (req, res) => {
  * @apiName Login
  * @apiGroup Users
  *
- * @apiSuccess {String} username User Username
- * @apiSuccess {String} password User Password
+ * @apiSuccess {String} message Greeting!
+ * @apiSuccess {String} token Keep it! Or you can't sit with us
+ * @apiSuccess {Number} id User id
  *
  * @apiSuccessExample Successful Response:
  * HTTP/1.1 201 Created
- * 	{
- *	  "username": "ana",
- *	  "password": "token"
- *	}
+ *  {
+ *   "message": "Welcome ana!",
+ *   "token": "tokenreallylong",
+ *   "id": 1
+ *  }
  *
  */
 router.post('/login', (req, res) => {
 	let { username, password } = req.body;
-	console.log(req.body);
 
 	return Helpers.findBy({ username })
 		.first()
 		.then(user => {
-			console.log('user', user);
 			if (user && bcrypt.compareSync(password, user.password)) {
 				const token = generateToken(user);
 				const id = user.id;
@@ -85,7 +90,7 @@ function generateToken(user) {
 		//other data
 	};
 	const options = {
-		expiresIn: '1d'
+		expiresIn: '10d'
 	};
 
 	return jwt.sign(payload, jwtSecret, options);
