@@ -1,6 +1,5 @@
 const db = require('./../data/connection.js');
 
-//retrieving a list of articles
 function getArticlesById(cat_id, user_id) {
 	return db('article')
 		.join('category', 'category.id', 'article.category_id')
@@ -36,7 +35,6 @@ function addArticle(article, cat_id, user_id) {
 		author: article.author,
 		category_id: cat_id
 	};
-	console.log('new', newArticle);
 	return db('article')
 		.insert(newArticle)
 		.where('article.category_id', cat_id)
@@ -52,19 +50,10 @@ function updateArticle(article, art_id, user_id) {
 		urlToImage: article.urlToImage,
 		author: article.author
 	};
-	console.log('new', updated);
 	return db('article')
 		.update(updated)
 		.where('article.id', art_id);
 }
-
-//retrieving a list of tasks, should include the project name and project description.
-
-//retrieving a list of tasks, should include the project name and project description.
-
-//adding resources
-
-//adding projects
 
 module.exports = {
 	addArticle,

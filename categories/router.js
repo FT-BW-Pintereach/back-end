@@ -32,7 +32,6 @@ router.get('/:id', (req, res) => {
 
 	Categories.findById(id)
 		.then(categories => {
-			console.log('yo', categories);
 			res.json(categories);
 		})
 		.catch(err => {
@@ -80,10 +79,8 @@ router.get('/:id/articles', (req, res) => {
 	const cat = {
 		art: []
 	};
-	console.log('id', id);
 	Categories.findArticles(id)
 		.then(articles => {
-			console.log('yo', articles);
 			cat.art = articles;
 			res.json(cat);
 		})
@@ -108,10 +105,7 @@ router.get('/:id/articles', (req, res) => {
 //create get folders/categories from a user
 router.post('/:id', (req, res) => {
 	const { id } = req.params;
-	console.log('ui', req.headers.user_id);
 	const name = req.body.name;
-	console.log(id);
-	console.log(name);
 
 	Categories.addFolder(name, id)
 		.then(folder => {
@@ -146,9 +140,6 @@ router.put('/:id', (req, res) => {
 	const cat_id = req.params.id;
 	const user_id = req.headers.user_id;
 	const name = req.body.name;
-	console.log('user_id', user_id);
-	console.log('cat_id', cat_id);
-	console.log('name', name);
 
 	Categories.updateFolder(name, cat_id, user_id)
 		.then(folder => {
@@ -181,11 +172,9 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
 	const user_id = req.headers.user_id;
 	const cat_id = req.params.id;
-	console.log('user_id', user_id);
-	console.log('cat_id', cat_id);
+
 	Categories.del(cat_id)
 		.then(folder => {
-			console.log('folder', folder);
 			res.status(201).json(folder);
 		})
 		.catch(({ name, code, message, stack }) => {
@@ -215,7 +204,6 @@ router.post('/:id/favorite', (req, res) => {
 
 	Categories.addFav(cat_id)
 		.then(response => {
-			console.log(response);
 			res.status(201).json(response);
 		})
 		.catch(({ name, code, message, stack }) => {

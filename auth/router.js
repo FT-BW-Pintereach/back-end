@@ -61,12 +61,10 @@ router.post('/register', (req, res) => {
  */
 router.post('/login', (req, res) => {
 	let { username, password } = req.body;
-	console.log(req.body);
 
 	return Helpers.findBy({ username })
 		.first()
 		.then(user => {
-			console.log('user', user);
 			if (user && bcrypt.compareSync(password, user.password)) {
 				const token = generateToken(user);
 				const id = user.id;
@@ -92,7 +90,7 @@ function generateToken(user) {
 		//other data
 	};
 	const options = {
-		expiresIn: '1d'
+		expiresIn: '10d'
 	};
 
 	return jwt.sign(payload, jwtSecret, options);

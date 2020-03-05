@@ -28,7 +28,6 @@ function findById(id) {
 }
 
 function findBy(filter) {
-	console.log('filter', filter);
 	return db('user').where(filter);
 }
 

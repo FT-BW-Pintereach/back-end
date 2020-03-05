@@ -54,12 +54,9 @@ const Articles = require('./model.js');
 router.get('/:id', (req, res) => {
 	const user_id = req.headers.user_id;
 	const cat_id = req.params.id;
-	console.log('cat_id', cat_id);
-	console.log('user_id', user_id);
 
 	Articles.getArticlesById(cat_id, user_id)
 		.then(resources => {
-			console.log('working');
 			res.json(resources);
 		})
 		.catch(err => {
@@ -140,8 +137,8 @@ router.post('/:id/', (req, res) => {
  * @apiParam {Number} article_id Category/Folder id - sent in params as id
  * @apiParam {String} title Title of Article
  * @apiParam {String} description Article's Description
- * @apiParam {url} url Article's Url
- * @apiParam {urlToImage} Image Url
+ * @apiParam {String} url Article's Url
+ * @apiParam {String} urlToImage urlToImage
  * @apiParam {author} Author of the Article
  *
  * @apiSuccessExample Successful Response:
@@ -154,7 +151,6 @@ router.put('/:id/', (req, res) => {
 	const user_id = req.headers.user_id;
 	const art_id = req.params.id;
 	const article = req.body;
-	console.log('article', article);
 
 	Articles.updateArticle(article, art_id, user_id)
 		.then(updated => {
