@@ -5,12 +5,36 @@ function getCategories() {
 	return db('category');
 }
 
-function addFolder(name, user_id) {
+/* function addFolder(name, user_id) {
 	const newCategory = {
 		name: name,
-		user_id: user_id
+		user_id: user_id,
+		favorite: false
 	};
-	return db('category').insert(newCategory);
+	return db('category')
+		.insert(newCategory)
+		.then(ids => {
+			console.log('folder', ids);
+
+			return getById(ids);
+		});
+} */
+
+async function addFolder(newFolder) {
+	console.log('newFolder', newFolder);
+	return db('category').insert(newFolder);
+}
+
+function findById(id) {
+	console.log('workingg', id);
+	return db('category');
+}
+
+function getById(id) {
+	console.log('id', id);
+	return db('category')
+		.select('id')
+		.where({ id });
 }
 
 function updateFolder(changes, cat_id, user_id) {
@@ -34,9 +58,12 @@ function del(id) {
 		.del();
 }
 
-function findById(id) {
-	const user_id = id;
-	return db('category').where({ user_id });
+function delAll() {
+	return db('category').del();
+}
+
+function findBy(filter) {
+	return db('category').where(filter);
 }
 
 //retrieving a list of tasks, should include the project name and project description.
@@ -69,5 +96,8 @@ module.exports = {
 	del,
 	findArticles,
 	updateFolder,
-	addFav
+	addFav,
+	delAll,
+	findBy,
+	getById
 };

@@ -105,10 +105,16 @@ router.get('/:id/articles', (req, res) => {
 //create get folders/categories from a user
 router.post('/:id', (req, res) => {
 	const { id } = req.params;
-	const name = req.body.name;
-
-	Categories.addFolder(name, id)
+	const { name } = req.body;
+	const newFolder = {
+		name: req.body.name,
+		user_id: req.params.id,
+		favorite: false
+	};
+	console.log('id', req.body);
+	Categories.addFolder(newFolder)
 		.then(folder => {
+			console.log('folder', folder);
 			res.status(201).json({ Created: 'New Folder' });
 		})
 		.catch(err => {
@@ -188,6 +194,17 @@ router.delete('/:id', (req, res) => {
 	const cat_id = req.params.id;
 
 	Categories.del(cat_id)
+		.then(folder => {
+			res.status(201).json(folder);
+		})
+		.catch(({ name, code, message, stack }) => {
+			res.status(500).json({ name, code, message, stack });
+		});
+});
+
+//delete all folders/categories
+router.delete('/', (req, res) => {
+	Categories.delAll()
 		.then(folder => {
 			res.status(201).json(folder);
 		})

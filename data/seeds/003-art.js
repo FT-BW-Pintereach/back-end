@@ -54,26 +54,6 @@ exports.seed = function(knex) {
 					urlToImage: 'https://source.unsplash.com/random/200x200',
 					author: 'Person',
 					category_id: '1'
-				},
-				{
-					id: 6,
-					user_id: '2',
-					title: 'aarttt',
-					description: 'blabla',
-					url: 'https://learn.lambdaschool.com/course/cs-fsw',
-					urlToImage: 'https://source.unsplash.com/random/200x200',
-					author: 'Person',
-					category_id: '1'
-				},
-				{
-					id: 7,
-					user_id: '2',
-					title: 'atata',
-					description: 'blabla',
-					url: 'https://learn.lambdaschool.com/course/cs-fsw',
-					urlToImage: 'https://source.unsplash.com/random/200x200',
-					author: 'Person',
-					category_id: '2'
 				}
 			]);
 		});
