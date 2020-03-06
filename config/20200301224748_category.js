@@ -12,6 +12,8 @@ exports.up = function(knex) {
 			.inTable('user')
 			.onUpdate('CASCADE')
 			.onDelete('CASCADE');
+
+		tbl.boolean('favorite').defaultTo(false);
 	});
 };
 
